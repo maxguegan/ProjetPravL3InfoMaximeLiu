@@ -104,19 +104,14 @@ public class BinaryTreeAlmostComplete {
 	public void siftDown() {
 		BinaryTreeAlmostComplete current = this;
 		while(Objects.nonNull(current.left)) {
-			
+			BinaryTreeAlmostComplete plusGrandFils = current.left;
+			if(Objects.nonNull(current.right) && current.right.rootValue > current.left.rootValue)plusGrandFils = current.right;
+			if(current.rootValue >= plusGrandFils.rootValue)break;
 			int temp = current.rootValue;
-			if(current.rootValue < current.left.rootValue) {
-				current.rootValue = current.left.rootValue;
-				current.left.rootValue = temp;
-				current = current.left;
-			}else {
-				if(Objects.nonNull(this.right) && this.rootValue < this.right.rootValue) {
-					current.rootValue = current.right.rootValue;
-					current.right.rootValue = temp;
-					current = current.right;
-				}else break;
-			}
+			current.rootValue = plusGrandFils.rootValue;
+			plusGrandFils.rootValue = temp;
+			current = plusGrandFils;
+					
 			
 		}
 	}

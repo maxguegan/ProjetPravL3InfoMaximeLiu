@@ -38,7 +38,13 @@ public class HeapTree extends BinaryTreeAlmostComplete implements Heap {
 	
 	
 	public int extractMax() {
-		return 0;
+		if(!Objects.nonNull(this.left))return this.rootValue;
+		int max = this.rootValue;
+		BinaryTreeAlmostComplete supVal = super.getRightmostLowestNode();
+		this.rootValue = supVal.rootValue;
+		supVal
+		this.siftDown();
+		return max;
 	}
 	
 	
