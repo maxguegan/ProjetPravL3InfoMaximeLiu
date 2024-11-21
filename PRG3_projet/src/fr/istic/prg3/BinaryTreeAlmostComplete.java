@@ -98,12 +98,36 @@ public class BinaryTreeAlmostComplete {
 	
 	
 	public void siftDown() {
-		// TODO
+		BinaryTreeAlmostComplete current = this;
+		while(Objects.nonNull(current.left)) {
+			
+			int temp = current.rootValue;
+			if(current.rootValue < current.left.rootValue) {
+				current.rootValue = current.left.rootValue;
+				current.left.rootValue = temp;
+				current = current.left;
+			}else {
+				if(Objects.nonNull(this.right) && this.rootValue < this.right.rootValue) {
+					current.rootValue = current.right.rootValue;
+					current.right.rootValue = temp;
+					current = current.right;
+				}else break;
+			}
+			
+		}
 	}
 	
 	
 	public void siftUp() {
-		// TODO
+		BinaryTreeAlmostComplete current = this;
+		while(Objects.nonNull(current.up)) {
+			int temp = current.rootValue;
+			if(current.rootValue > current.up.rootValue) {
+				current.rootValue = current.up.rootValue;
+				current.up.rootValue = temp;
+				current = current.up;
+			}else break;
+		}
 	}
 	
 	
@@ -149,8 +173,9 @@ public class BinaryTreeAlmostComplete {
 	public static void main(String[] args) {
 		int[] values = {109,107,111,112,103,104,110,101,106,102,108,105};
 		BinaryTreeAlmostComplete tree = new BinaryTreeAlmostComplete(values);
-		BinaryTreeAlmostComplete treeRight = tree.getRightmostLowestNode();
-		System.out.println(treeRight.toString());
+		BinaryTreeAlmostComplete rightTree = tree.getRightmostLowestNode();
+		rightTree.siftUp();
+		System.out.println(tree.toString());
 	}
 
 }
