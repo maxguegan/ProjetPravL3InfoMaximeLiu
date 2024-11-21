@@ -26,7 +26,8 @@ public class BinaryTreeAlmostComplete {
 	
 	
 	public BinaryTreeAlmostComplete(int[] values) {
-		// TODO
+		this(values[0], null);
+		for(int i = 1; i < values.length; i++)addValue(values[i]);
 	}
 	
 	
@@ -84,7 +85,7 @@ public class BinaryTreeAlmostComplete {
 	
 	
 	protected BinaryTreeAlmostComplete getRightmostLowestNode() {
-		// TODO
+		return null;
 	}
 	
 	
@@ -107,8 +108,18 @@ public class BinaryTreeAlmostComplete {
 	
 	
 	public String toString(String offset) {
-		// TODO
-	}
+		StringBuilder chaine = 	new StringBuilder();
+		offset += offset + "  ";
+		chaine.append(this.rootValue + " (" + this.nbDescendants + " descendants)");
+		if (Objects.nonNull(this.left)) {
+			chaine.append("\n" + offset  + this.left.toString(offset));
+		}
+		if (Objects.nonNull(this.right)) {
+			chaine.append("\n" + offset + this.right.toString(offset));
+		}
+		
+		return chaine.toString()
+;	}
 	
 	
 	
@@ -130,7 +141,10 @@ public class BinaryTreeAlmostComplete {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO
+		int[] values = {109,107,111,112,103,104,110,101,106,102,108,105};
+		BinaryTreeAlmostComplete tree = new BinaryTreeAlmostComplete(values);
+		
+		System.out.println(tree.toString());
 	}
 
 }
