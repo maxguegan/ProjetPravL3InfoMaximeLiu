@@ -38,12 +38,19 @@ public class HeapTree extends BinaryTreeAlmostComplete implements Heap {
 	
 	
 	public int extractMax() {
-		if(!Objects.nonNull(this.left))return this.rootValue;
 		int max = this.rootValue;
+		if(!Objects.nonNull(this.left))return max;
 		BinaryTreeAlmostComplete supVal = super.getRightmostLowestNode();
 		this.rootValue = supVal.rootValue;
-		supVal
+		supVal.rootValue = max;
+		supVal = supVal.up;
+		if(Objects.nonNull(supVal.right)) {
+			supVal.right = null;
+		}else {
+			supVal.left = null;
+		}
 		this.siftDown();
+		supVal.updateNumberOfDescendants();
 		return max;
 	}
 	
@@ -54,7 +61,11 @@ public class HeapTree extends BinaryTreeAlmostComplete implements Heap {
 	
 	
 	public static int[] heapsort(int[] unsortedValues) {
-		int[] val = {0};
+		int[] val =  new int[unsortedValues.length];
+		HeapTree sortedTree = new HeapTree(unsortedValues);
+		for(int i = unsortedValues.length - 1; i >= 0; i--) {
+			val[i] = sortedTree.extractMax();
+		}
 		return val;
 	}
 	
@@ -69,8 +80,9 @@ public class HeapTree extends BinaryTreeAlmostComplete implements Heap {
 	public static void main(String[] args) {
 		System.out.println("CONSTRUCTION");
 		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 113, 106, 102, 108, 105};
-		HeapTree myTree = new HeapTree(treeValues);
-		System.out.println(myTree.getMax());
+		
+		int[] sortedVal = heapsort(treeValues);
+		for(int val : sortedVal)System.out.println(val);
 		System.out.println("\n");
 		
 		

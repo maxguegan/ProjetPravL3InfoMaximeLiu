@@ -22,7 +22,12 @@ public interface Heap {
 	
 	
 	public static int[] heapsort(int[] unsortedValues) {
-		// TODO
+		int[] val =  new int[unsortedValues.length];
+		HeapTree sortedTree = new HeapTree(unsortedValues);
+		for(int i = unsortedValues.length - 1; i >= 0; i--) {
+			val[i] = sortedTree.extractMax();
+		}
+		return val;
 	}
 	
 	
