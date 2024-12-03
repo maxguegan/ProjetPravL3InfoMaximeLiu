@@ -81,7 +81,9 @@ public class HeapTree extends BinaryTreeAlmostComplete implements Heap {
 		System.out.println("CONSTRUCTION");
 		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 113, 106, 102, 108, 105};
 		
+		System.out.println(System.nanoTime());
 		int[] sortedVal = heapsort(treeValues);
+		System.out.println(System.nanoTime());
 		for(int val : sortedVal)System.out.println(val);
 		System.out.println("\n");
 		
